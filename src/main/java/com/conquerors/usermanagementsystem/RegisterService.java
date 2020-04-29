@@ -16,9 +16,9 @@ import java.sql.PreparedStatement;
 public class RegisterService {
     
     private static String driver = "org.postgresql.Driver";
-    private static String url = "jdbc:postgresql://ec2-34-202-7-83.compute-1.amazonaws.com/d2eiku6ahai58o";
-    private static String root = "txigaxyjbnpcal";
-    private static String password = "38b0ecef6a21e338823173c6d464d18d895dbfbf7e0ddad29fea8d576e45460b";
+    private static String url = "jdbc:postgresql://ec2-52-87-135-240.compute-1.amazonaws.com/d8sdbs1raqifvu";
+    private static String root = "msqhhpagomxtlq";
+    private static String password = "8da3f0bc68fb5fb5dc6755762b616a944086831dbf642caeb23f7f78a8e5dfda";
     
     public static void register(User user) throws Exception {
         
