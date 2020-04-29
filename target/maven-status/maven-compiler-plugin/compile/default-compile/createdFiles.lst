@@ -1,0 +1,6 @@
+com\conquerors\usermanagementsystem\LoginService.class
+com\conquerors\usermanagementsystem\RegisterService.class
+com\conquerors\usermanagementsystem\User.class
+.netbeans_automatic_build
+com\conquerors\usermanagementsystem\LoginServlet.class
+com\conquerors\usermanagementsystem\RegisterServlet.class
