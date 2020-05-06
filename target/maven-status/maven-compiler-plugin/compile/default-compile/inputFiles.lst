@@ -1,5 +1,5 @@
-C:\Users\iammd\Documents\Herald\SAD\user-management-system\src\main\java\com\conquerors\usermanagementsystem\RegisterService.java
-C:\Users\iammd\Documents\Herald\SAD\user-management-system\src\main\java\com\conquerors\usermanagementsystem\LoginService.java
-C:\Users\iammd\Documents\Herald\SAD\user-management-system\src\main\java\com\conquerors\usermanagementsystem\User.java
-C:\Users\iammd\Documents\Herald\SAD\user-management-system\src\main\java\com\conquerors\usermanagementsystem\RegisterServlet.java
-C:\Users\iammd\Documents\Herald\SAD\user-management-system\src\main\java\com\conquerors\usermanagementsystem\LoginServlet.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\ConnectDB.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\RegisterServlet.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\dao\UserDao.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\LoginServlet.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\model\User.java

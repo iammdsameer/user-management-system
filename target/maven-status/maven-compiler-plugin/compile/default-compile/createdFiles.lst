@@ -1,6 +1,5 @@
-com\conquerors\usermanagementsystem\LoginService.class
-com\conquerors\usermanagementsystem\RegisterService.class
-com\conquerors\usermanagementsystem\User.class
-.netbeans_automatic_build
-com\conquerors\usermanagementsystem\LoginServlet.class
-com\conquerors\usermanagementsystem\RegisterServlet.class
+com\conquerors\usermanagementsystem\controller\RegisterServlet.class
+com\conquerors\usermanagementsystem\dao\UserDao.class
+com\conquerors\usermanagementsystem\model\User.class
+com\conquerors\usermanagementsystem\ConnectDB.class
+com\conquerors\usermanagementsystem\controller\LoginServlet.class
