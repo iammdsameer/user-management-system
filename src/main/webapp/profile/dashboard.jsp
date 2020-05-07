@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
+    String first_name = (String) session.getAttribute("first_name");
 %>
 <% if (isLoggedIn != "true")
         response.sendRedirect("../index.jsp");%>
@@ -15,9 +16,7 @@
         <title>Conquerors</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -35,13 +34,13 @@
                     <h1><a href="index.html" class="logo">Conquerors <span>User Management System</span></a></h1>
                     <ul class="list-unstyled components mb-5">
                         <li class="active">
-                            <a href="#"><span class="fa fa-home mr-3"></span> Dashboard</a>
+                            <a href="dashboard.jsp"><span class="fa fa-home mr-3"></span> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-user mr-3"></span> Profile</a>
+                            <a href="me.jsp"><span class="fa fa-user mr-3"></span> Profile</a>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-history mr-3"></span> History</a>
+                            <a href="history.jsp"><span class="fa fa-history mr-3"></span> History</a>
                         </li>
                         <li>
                             <a href="#"><span class="fa fa-cogs mr-3"></span> Settings</a>
@@ -68,7 +67,7 @@
 
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5">
-                <h2 class="mb-4">Dashboard</h2>
+                <h2 class="mb-4">Hello <%= first_name.substring(0, 1).toUpperCase() + first_name.substring(1) %>,</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>

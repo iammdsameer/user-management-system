@@ -8,7 +8,6 @@ package com.conquerors.usermanagementsystem.controller;
 import com.conquerors.usermanagementsystem.dao.UserDao;
 import com.conquerors.usermanagementsystem.model.User;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,18 +37,26 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
 
             User checkUser = userDao.login(username, password);
-            
+
             if (checkUser != null) {
                 nextPage = "profile/dashboard.jsp";
                 session.setAttribute("isLoggedIn", "true");
+                session.setAttribute("first_name", checkUser.getFirst_name());
+                session.setAttribute("last_name", checkUser.getLast_name());
+                session.setAttribute("email", checkUser.getEmail());
+                session.setAttribute("username", checkUser.getUsername());
+                session.setAttribute("pass", checkUser.getPassword());
+                session.setAttribute("birth_date", checkUser.getBirth_date());
+                session.setAttribute("phone", checkUser.getPhone());
+                session.setAttribute("id", checkUser.getId());
             } else {
                 // This will redirect user to the login page telling that account was unable to login.
                 session.setAttribute("loginuser", "Re-check your credentials.");
                 nextPage = "index.jsp";
             }
-            
+
             response.sendRedirect(nextPage);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

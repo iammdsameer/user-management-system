@@ -34,24 +34,30 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("phone_number");
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
+        String birthDate = request.getParameter("birth_date");
 
         User user = new User();
 
-        user.setEmail(email);
-        user.setUsername(username);
+        user.setEmail(email.toLowerCase());
+        user.setUsername(username.toLowerCase());
         user.setPassword(password);
         user.setPhone(phone);
-        user.setFirst_name(firstName);
-        user.setLast_name(lastName);
-        
+        user.setFirst_name(firstName.toLowerCase());
+        user.setLast_name(lastName.toLowerCase());
+        user.setBirth_date(birthDate);
+
         try {
-            userDao.register(user);
-            response.sendRedirect("profile/dashboard.jsp");
+            int isSuccess = userDao.register(user);
+            if (isSuccess != 0) {
+                session.setAttribute("registered", "Your account has been registered. <br> Login to continue.");
+            } else {
+                // This will redirect user to the registration page telling that account was not created.
+                session.setAttribute("error", "A user with your information already exists.");
+            }
         } catch (Exception e) {
-            // This will redirect user to the registration page telling that account was not created.
-            session.setAttribute("error", "A user with your information already exists.");
-            response.sendRedirect("index.jsp");
+            e.printStackTrace();
         }
+        response.sendRedirect("index.jsp");
     }
 
     @Override

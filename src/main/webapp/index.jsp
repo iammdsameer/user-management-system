@@ -6,15 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String errorMessage = (String) session.getAttribute("error"); %>
-<% String notLoggedIn = (String) session.getAttribute("loginuser");
-%>
-<% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
+    String notLoggedIn = (String) session.getAttribute("loginuser");
+    String registered = (String) session.getAttribute("registered");
+    String errorMessage = (String) session.getAttribute("error");
+    String isLoggedIn = (String) session.getAttribute("isLoggedIn");
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Login / Register</title>
+
+        <!--Collapse to scroll lesser-->
+
         <style type="text/css">
             @import url(https://fonts.googleapis.com/css?family=Roboto:300);
             .login-page {
@@ -116,7 +119,9 @@
                 -moz-osx-font-smoothing: grayscale;      
             }
         </style>
-        <% if (isLoggedIn == "true") response.sendRedirect("profile/dashboard.jsp"); %>
+        <% if (isLoggedIn == "true") {
+                response.sendRedirect("profile/dashboard.jsp");
+            } %>
     </head>
     <body>
         <div class="login-page">
@@ -124,21 +129,29 @@
                 <% if (errorMessage != null) {%>
                 <p style="color:red; font-size: 12px;"> 
                     <%= errorMessage%>
+                    <% session.removeAttribute("error");%>
                 </p>
                 <% }%> 
                 <% if (notLoggedIn != null) {%>
                 <p style="color:red; font-size: 12px;"> 
                     <%= notLoggedIn%>
+                    <% session.removeAttribute("loginuser");%>
+                </p>
+                <% }%>
+                <% if (registered != null) {%>
+                <p style="color:green; font-size: 12px;"> 
+                    <%= registered%>
+                    <% session.removeAttribute("registered");%>
                 </p>
                 <% }%>
                 <form method="POST" action="register" class="register-form">
                     <input type="text" name="first_name" placeholder="first name"/>
                     <input type="text" name="last_name" placeholder="last name"/>
                     <input type="text" name="phone_number" placeholder="phone"/>
-                    <input type="password" name="password" placeholder="password"/>
-                    <input type="password" placeholder="repeat password"/>
                     <input type="text" name="email" placeholder="email address"/>
                     <input type="text" name="username" placeholder="username"/>
+                    <input type="password" name="password" placeholder="password"/>
+                    <input type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
                     <button>create</button>
                     <p class="message">Already registered? <a href="#">Sign In</a></p>
                 </form>

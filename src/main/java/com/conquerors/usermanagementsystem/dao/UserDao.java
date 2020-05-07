@@ -5,9 +5,9 @@
  */
 package com.conquerors.usermanagementsystem.dao;
 
+import com.conquerors.usermanagementsystem.ConnectDB;
 import com.conquerors.usermanagementsystem.model.User;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,22 +18,16 @@ import java.sql.SQLException;
  */
 public class UserDao {
 
-    private static String driver = "org.postgresql.Driver";
-    private static String url = "jdbc:postgresql://ec2-52-87-135-240.compute-1.amazonaws.com/d8sdbs1raqifvu";
-    private static String root = "msqhhpagomxtlq";
-    private static String password = "8da3f0bc68fb5fb5dc6755762b616a944086831dbf642caeb23f7f78a8e5dfda";
-
     public int register(User user) throws ClassNotFoundException {
 
         int result = 0;
-        Class.forName(driver);
 
         try {
 
-            Connection conn = DriverManager.getConnection(url, root, password);
+            String sql = "INSERT INTO client(email,username,phone,pass,first_name,last_name,birth_date) "
+                    + "VALUES (?,?,?,?,?,?,?);";
 
-            String sql = "INSERT INTO client(email,username,phone,pass,first_name,last_name) "
-                    + "VALUES (?,?,?,?,?,?);";
+            Connection conn = ConnectDB.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, user.getEmail());
@@ -42,22 +36,26 @@ public class UserDao {
             ps.setString(4, user.getPassword());
             ps.setString(5, user.getFirst_name());
             ps.setString(6, user.getLast_name());
+            ps.setString(7, user.getBirth_date());
 
-            return ps.executeUpdate();
+            int status = ps.executeUpdate();
+
+            conn.close();
+            ps.close();
+
+            return status;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
-    
+
     public User login(String username, String pass) throws Exception {
         User user = null;
         try {
 
-            Class.forName(driver);
-            Connection conn = DriverManager.getConnection(url, root, password);
-
+            Connection conn = ConnectDB.getConnection();
             String sql = "SELECT * FROM client WHERE username=? AND pass=?;";
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -65,19 +63,53 @@ public class UserDao {
             ps.setString(2, pass);
 
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 user = new User();
                 user.setFirst_name(rs.getString("first_name"));
                 user.setLast_name(rs.getString("last_name"));
                 user.setEmail(rs.getString("email"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("pass"));
+                user.setBirth_date(rs.getString("birth_date"));
+                user.setPhone(rs.getString("phone"));
+                user.setId(rs.getInt("id"));
             }
 
         } catch (Exception e) {
             throw e;
         }
-        
+
         return user;
+    }
+
+    public int makeChanges(User user) throws Exception {
+        int result = 0;
+
+        Connection conn = ConnectDB.getConnection();
+
+        try {
+            String sql = "UPDATE client set "
+                    + "email = ?," + "username = ?," + "phone = ?,"
+                    + "pass = ?," + "first_name = ?," + "last_name = ?," + "birth_date = ? "
+                    + "where id=?" + ";";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getUsername());
+            ps.setString(3, user.getPhone());
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getFirst_name());
+            ps.setString(6, user.getLast_name());
+            ps.setString(7, user.getBirth_date());
+            ps.setInt(8, user.getId());
+
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

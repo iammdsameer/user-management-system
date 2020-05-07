@@ -1,0 +1,380 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 6, 2020, 8:53:32 PM
+    Author     : iammd
+*/
+
+.me {
+  width: 60%;
+  margin: 60px auto;
+  background: #efefef;
+  padding: 60px 120px 80px 120px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  position: relative;
+  margin: 40px 0px;
+}
+.label-txt {
+  position: absolute;
+  top: -1.6em;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: .8em;
+  letter-spacing: 1px;
+  color: rgb(120,120,120);
+  transition: ease .3s;
+}
+.input {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.line-box {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: #BCBCBC;
+}
+
+.line {
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3445B4;
+  transition: ease .6s;
+}
+
+.input:focus + .line-box .line {
+  width: 100%;
+}
+
+.label-active {
+  top: -3em;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: rgb(220,220,220);
+  font-weight: bold;
+  color: rgb(120,120,120);
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: ease .3s;
+}
+
+button:hover {
+  background: #3445B4;
+  color: #ffffff;
+}
+
+
+/*bday*/
+
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+
+.formInput {
+    position: relative;
+    font: 300 1em/48px "Open Sans";
+    margin: 0 0 8px;
+    padding: 0;
+    border-bottom: 1px solid #c0c0c0;
+    border-radius: 4px;
+    overflow: hidden;
+    color: #505050;
+}
+.formInput:hover {
+    color: black;
+}
+.formInput i {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 47px;
+    line-height: 48px;
+    text-align: center;
+    /*background-color: #e0e0e0;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.25);*/
+    font-size: 1em;
+    transition: box-shadow .2s, color .3s, background-color .4s;
+}
+.formInput input {
+    box-sizing: border-box;
+    z-index: 1;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    font-size: 1em;
+    font: inherit;
+    border: 0;
+    margin: 0;
+    padding: 0 4px 0 56px;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    width: 100%;
+    height: 47px;
+    line-height: 47px;
+    background: transparent;
+    color: inherit;
+    transition: border-color .2s, color .2s, background-color .4s;
+}
+
+.formInput.hasTextarea {
+    line-height: 24px;
+    height: 191px;
+}
+.formInput.hasTextarea i {
+    border-radius: 0 0 3px;
+}
+.formInput textarea {
+    box-sizing: border-box;
+    resize: none;
+    z-index: 1;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    font-size: 1em;
+    font: inherit;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    margin: 0;
+    padding: 12px 4px 6px 56px;
+    width: 100%;
+    height: 100%;
+    line-height: 24px;
+    background: transparent;
+    color: inherit;
+    transition: border-color .2s, color .2s, background-color .4s;
+}
+.formInput input[disabled]:active,.formInput input[disabled]:focus,
+.formInput input[disabled]:hover {
+    border-color: transparent;
+    background-color: transparent;
+}
+.formInput input:active, .formInput input:focus,
+.formInput textarea:active, .formInput textarea:focus,
+.formInput.dateSelector:hover input{
+    border-color: #b0b0b0;
+    outline: none;
+    color: black;
+    background-color: rgba(0,0,0,0.025);
+}
+.formInput.radioBtn {
+    padding-bottom: 24px;
+}
+.formInput.radioBtn .formInputChild {
+    font: 300 1em/28px "Open Sans";
+}
+.formInput.radioBtn input {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    margin: 7px 9px;
+    position: relative;
+}
+.formInput.radioBtn label {
+    font-size: 0.95em;
+}
+
+.formInput .formInputDescription {
+    position: relative;
+    padding: 0 0 0 56px;
+}
+.formInput .formInputChild {
+    font: 300 1em/48px "Open Sans";
+    position: relative;
+    padding: 0 0 0 56px;
+}
+.formInput.checkboxBtn {
+
+}
+.formInput.checkboxBtn input {
+    width: 14px;
+    height: 14px;
+    margin: 17px 16px 16px;
+    padding: 0;
+}
+.formInput.checkboxBtn i {
+    display: none;
+}
+.formInput.dateSelector {
+    transition: background-color .2s;
+}
+.calendar {
+    position: relative;
+    display: block;
+    font: 500 0.8em/30px "Open Sans";
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    padding: 0 0 0 57px;
+    color: #404040;
+}
+.calendar .view {
+    position: relative;
+    float: left;
+}
+.calendar .nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.calendar .nav .btn {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    cursor: pointer;
+    cursor: hand;
+    width: 32px;
+    height: 32px;
+    line-height: 31px;
+    top: 0;
+    left: auto;
+    transition: opacity .5s;
+    border-radius: 4px;
+}
+.calendar .nav .btn:hover {
+    color: #808080;
+    background: #e0e0e0;
+    border-color: #606060;
+}
+
+.calendar .nav .prev {
+    left: 0;
+}
+
+.calendar .nav .prev-year {
+    opacity: 0;
+    left: 32px;
+}
+.calendar .nav:hover .prev-year {
+    opacity: 1;
+}
+.calendar .nav .next-year {
+    opacity: 0;
+    right: 32px !important;
+}
+.calendar .nav:hover .next-year {
+    opacity: 1;
+}
+
+.calendar .nav .next {
+    right: 0;
+}
+
+
+
+.calendar .head {
+}
+.calendar .head .title {
+    font: 300 1.2em/32px "Open Sans";
+    position: relative;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.calendar .head span {
+    cursor: pointer;
+}
+.calendar .row {
+    clear: both;
+}
+.calendar .row.th {
+    font-weight: 700;
+    text-transform: uppercase;
+    height: 40px;
+}
+.calendar .row.th .C {
+    border-bottom: 1px solid #c0c0c0;
+    border-radius: 0;
+}
+.calendar .C {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    transition: background-color .05s, color .05s;
+    border-radius: 50%;
+}
+.calendar .C.mn {
+    cursor: pointer;
+    cursor: hand;
+}
+.calendar .C.mn:hover {
+    background: #565656;
+    color: white;
+}
+.calendar .C.g {
+    color: #a0a0a0;
+    font-weight: 300;
+}
+.calendar .C.slctd {
+    background: #202020;
+    color: white;
+    font-size: 1.15em;
+    font-weight: 300;
+}
+.calendar .C.today {
+    font-weight: 900;
+    font-size: 1.3em;
+}
+
+.calendar .selected {
+    margin: 0 0 0 64px;
+    float: right;
+    text-align: center;
+    width: 280px;
+}
+.calendar .selected .desc {
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.calendar .selected .val {
+    padding: 0 8px;
+    background: #f0f0f0;
+    color: #808080;
+}
+
+
+.calendar .dayArea {
+    position: relative;
+    width: 280px;
+    height: 240px;
+    overflow: hidden;
+}
+.calendar .dayArea .mArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

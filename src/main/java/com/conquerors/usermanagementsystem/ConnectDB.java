@@ -7,6 +7,7 @@ package com.conquerors.usermanagementsystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,20 +16,14 @@ import java.sql.DriverManager;
 public class ConnectDB {
 
     private static String driver = "org.postgresql.Driver";
-    private static String url = "jdbc:postgresql://ec2-52-87-135-240.compute-1.amazonaws.com/d8sdbs1raqifvu";
-    private static String root = "msqhhpagomxtlq";
-    private static String password = "8da3f0bc68fb5fb5dc6755762b616a944086831dbf642caeb23f7f78a8e5dfda";
+    private static String url = "jdbc:postgresql://ec2-18-232-143-90.compute-1.amazonaws.com/d1pd93qkh24v0h";
+    private static String root = "jyopgpxnkrnmen";
+    private static String password = "006ebffe6b8dcac9c2e7bb980823a295ea659c0c6d3fdf3c1ce9a82d59fd78f1";
 
-    public ConnectDB() {
-        
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+        Class.forName(driver);
+        Connection conn = DriverManager.getConnection(url, root, password);
+        return conn;
     }
-    
-    public static void main(String[] args) throws Exception {
-        try {
-            Class.forName(driver);
-            Connection conn = DriverManager.getConnection(url, root, password);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+      
 }
