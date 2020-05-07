@@ -153,19 +153,21 @@
                     <input type="password" name="password" placeholder="password"/>
                     <input type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
                     <button>create</button>
-                    <p class="message">Already registered? <a href="#">Sign In</a></p>
+                    <p class="message">Already registered? <a class="new" href="#">Sign In</a></p>
                 </form>
                 <form method="POST" action="login" class="login-form">
                     <input type="text" name="username" placeholder="username"/>
                     <input type="password" name="password" placeholder="password"/>
                     <button>login</button>
-                    <p class="message">Not registered? <a href="#">Create an account</a></p>
+                    <p class="message"><a href="help.jsp">Forgot Password?</a></p>
+                    <p class="message">Not registered? <a class="new" href="#">Create an account</a></p>
                 </form>
+                
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript">
-            $('.message a').click(function () {
+            $('.message .new').click(function () {
                 $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
             });
         </script>

@@ -1,6 +1,7 @@
 com\conquerors\usermanagementsystem\controller\RegisterServlet.class
 com\conquerors\usermanagementsystem\dao\UserDao.class
 com\conquerors\usermanagementsystem\model\User.class
+com\conquerors\usermanagementsystem\controller\LoginServlet.class
+com\conquerors\usermanagementsystem\controller\RecoverPassword.class
 com\conquerors\usermanagementsystem\ConnectDB.class
 com\conquerors\usermanagementsystem\controller\EditProfile.class
-com\conquerors\usermanagementsystem\controller\LoginServlet.class

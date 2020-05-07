@@ -111,5 +111,25 @@ public class UserDao {
         }
         return result;
     }
+    
+    public int recoverPassword(User user) throws Exception {
+        int result = 0;
+        
+        try {
+            String sql = "UPDATE client SET pass=? WHERE phone=?;";
+            Connection conn = ConnectDB.getConnection();
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "helloworld");
+            ps.setString(2, user.getPhone());
+            
+            return ps.executeUpdate();
+                
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
 
 }

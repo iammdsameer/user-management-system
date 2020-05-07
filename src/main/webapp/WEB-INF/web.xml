@@ -12,6 +12,10 @@
         <servlet-name>EditProfile</servlet-name>
         <servlet-class>com.conquerors.usermanagementsystem.controller.EditProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecoverPassword</servlet-name>
+        <servlet-class>com.conquerors.usermanagementsystem.controller.RecoverPassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/edit-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecoverPassword</servlet-name>
+        <url-pattern>/recover</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

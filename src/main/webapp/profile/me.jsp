@@ -57,7 +57,7 @@
                             <a href="#"><span class="fa fa-cogs mr-3"></span> Settings</a>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
+                            <a href="contacts.jsp"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
                         </li>
                         <li>
                             <a href="logout.jsp"><span class="fa fa-sign-out mr-3"></span> Log Out</a>

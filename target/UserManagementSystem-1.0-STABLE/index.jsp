@@ -17,14 +17,14 @@
     </head>
     <body>
 
-        <div class="visit"><a href="index.jsp"> Get along with. Register!</a></div>
+        <div class="visit"><a href="login.jsp"> Get along with. Register!</a></div>
         <div id="particles-js">
             <div class="container">
                 <div class="row top">
                     <div class="twelve column">
                         <div class="logo">Conquerors</div>
                         <h2>User Management System</h2>
-                        <a href="index.jsp"><h1> Already a member? Login.</h1></a>
+                        <a href="login.jsp"><h1> Already a member? Login.</h1></a>
                     </div>
                 </div>
 
