@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 // This will redirect user to the login page telling that account was unable to login.
                 session.setAttribute("loginuser", "Re-check your credentials.");
-                nextPage = "index.jsp";
+                nextPage = "login.jsp";
             }
 
             response.sendRedirect(nextPage);
