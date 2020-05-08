@@ -18,6 +18,7 @@ public class User {
      */
 
     private int id;
+    private int isAdmin;
     private String email;
     private String username;
     private String phone;
@@ -33,6 +34,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
     
     public String getBirth_date() {

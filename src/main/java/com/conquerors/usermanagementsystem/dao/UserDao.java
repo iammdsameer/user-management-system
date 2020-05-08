@@ -74,6 +74,7 @@ public class UserDao {
                 user.setBirth_date(rs.getString("birth_date"));
                 user.setPhone(rs.getString("phone"));
                 user.setId(rs.getInt("id"));
+                user.setIsAdmin(rs.getInt("is_admin"));
             }
 
         } catch (Exception e) {
