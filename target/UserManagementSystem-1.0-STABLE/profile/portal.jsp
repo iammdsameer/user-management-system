@@ -8,7 +8,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
     int isAdmin = (Integer) session.getAttribute("is_admin");
-    int activeUsers = SessionCounterListener.getTotalActiveSession();
 %>
 
 <% if (isLoggedIn != "true")
@@ -69,16 +68,33 @@
 
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5">
-                <% if (isAdmin == 0) {%>
-                <div class="alert alert-danger" role="alert">
-                    You are not authorized to access this page. Verify that you have the proper admin privilege !
-                </div>
-                <% } else {%>
+                <% if (isAdmin == 1) {%>
                 <h2 class="mb-4">Hey Admin,</h2>
+<!--                <div class="list-group user-list ">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                      Cras justo odio
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+                </div>-->
                 <div class="card card-4">
                     <br>
                     <h3>No. of Active Users</h3>
-                    <p style='font-size: 6em; color: #3445B4;'><%= activeUsers %></p>
+                    <p style='font-size: 6em; color: #3445B4;'><%= SessionCounterListener.getTotalActiveSession() %></p>
+                </div>
+                <% } else {%>
+                <div class="alert alert-danger" role="alert">
+                    You are not authorized to access this page. Verify that you have the proper admin privilege !
                 </div>
                 <% }%>
             </div>

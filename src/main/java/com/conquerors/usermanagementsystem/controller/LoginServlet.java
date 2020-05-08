@@ -37,8 +37,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
 
             User checkUser = userDao.login(username, password);
-
-            int c = checkUser.getIsAdmin();
+ 
             if (checkUser != null) {
                 nextPage = "profile/dashboard.jsp";
                 session.setAttribute("isLoggedIn", "true");
@@ -50,7 +49,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("birth_date", checkUser.getBirth_date());
                 session.setAttribute("phone", checkUser.getPhone());
                 session.setAttribute("id", checkUser.getId());
-                session.setAttribute("is_admin", c);
+                session.setAttribute("is_admin", checkUser.getIsAdmin());
             } else {
                 // This will redirect user to the login page telling that account was unable to login.
                 session.setAttribute("loginuser", "Re-check your credentials.");

@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
+%>
+<% if (isLoggedIn == "true")
+        response.sendRedirect("profile/dashboard.jsp");%>
 <!DOCTYPE html>
 <html lang="en" >
     <head>
