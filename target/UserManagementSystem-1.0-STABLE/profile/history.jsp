@@ -26,6 +26,38 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <style>
+            ul.timeline {
+                list-style-type: none;
+                position: relative;
+            }
+            ul.timeline:before {
+                content: ' ';
+                background: #d4d9df;
+                display: inline-block;
+                position: absolute;
+                left: 29px;
+                width: 2px;
+                height: 100%;
+                z-index: 400;
+            }
+            ul.timeline > li {
+                margin: 20px 0;
+                padding-left: 20px;
+            }
+            ul.timeline > li:before {
+                content: ' ';
+                background: white;
+                display: inline-block;
+                position: absolute;
+                border-radius: 50%;
+                border: 3px solid #3445B4;
+                left: 20px;
+                width: 20px;
+                height: 20px;
+                z-index: 400;
+            }
+        </style>
     </head>
     <body>
 
@@ -74,18 +106,32 @@
 
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5">
-                <h2 class="mb-4">History</h2>
-                <%
-                    Connection conn = ConnectDB.getConnection();
-                    String sql = "SELECT * FROM history where uid=" + id;
-                    PreparedStatement ps = conn.prepareStatement(sql);
-                    ResultSet rs = ps.executeQuery();
+                <h2 class="mb-4">Your Past Activities</h2>
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <ul class="timeline">
+                                <%
+                                    Connection conn = ConnectDB.getConnection();
+                                    String sql = "SELECT * FROM history where uid=" + id;
+                                    PreparedStatement ps = conn.prepareStatement(sql);
+                                    ResultSet rs = ps.executeQuery();
 
-                    while (rs.next()) {
-                        out.println(rs.getString("logged_on"));
-                        out.println(rs.getString("logged_at"));
-                    }
-                %>
+                                    while (rs.next()) {
+                                        String date = rs.getString("logged_on") + " | ";
+                                        String time = rs.getString("logged_at");
+
+                                        out.println("<li>"
+                                                + "<a>New Login Event</a>"
+                                                + "<a class='float-right'>" + date + time + "</a>"
+                                                + "<p>A new login activity was seen by you in this due time. If it was not you then we would recommend you to change your password to make the account secure.</p>"
+                                                + "</li>");
+                                    }
+                                %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
