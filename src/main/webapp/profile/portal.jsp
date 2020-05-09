@@ -16,18 +16,16 @@
     String registered = (String) session.getAttribute("registered");
     if (isLoggedIn != "true" || isAdmin == null) {
         response.sendRedirect("../login.jsp");
-    }
-
-    else if (isAdmin != 1) {
+    } else if (isAdmin != 1) {
         response.sendRedirect("notadmin.jsp");
-    }  
+    }
 %>
 <!DOCTYPE html>
 <html lang="en" >
     <head>
         <meta charset="UTF-8">
         <title>Admin Portal</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href='css/bootstrap.min.css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/portal.css">
@@ -160,64 +158,52 @@
                 </section>
                 <section id="panel-2">
                     <main>
-                        <h1>Total Registered Users</h1>
                         <%
                             Connection conn = ConnectDB.getConnection();
                             String sql = "SELECT * FROM client";
                             PreparedStatement ps = conn.prepareStatement(sql);
                             ResultSet rs = ps.executeQuery();
                             String adminTag = " <i class='fa fa-shield'></i>";
+                            String first_name;
+                            String last_name;
                             while (rs.next()) {
+                                first_name = rs.getString("first_name")+ " ";
+                                last_name = rs.getString("last_name");
                                 if (rs.getInt("is_blocked") == 1) {
-                                    out.println("<div class='card' style='width: 100%; height: 10rem;'><div class='card-body'><h5 class='card-title'> " + rs.getString("first_name").substring(0, 1).toUpperCase()
-                                            + rs.getString("first_name").substring(1) + " "
-                                            + rs.getString("last_name").substring(0, 1).toUpperCase()
-                                            + rs.getString("last_name").substring(1)
-                                            + adminTag + "</h5>"
-                                            + "<h6 class='card-subtitle mb-2 text-muted'>registered on</h6>"
-                                            + "<a href='#' class='card-link'>Edit</a><a style='color: red;' href='../unblock-user?id=" + rs.getInt("id") + "' class='card-link'>Unblock</a>"
-                                            + "<p class='card-text'>This account is disable by the admin. User has no longer the access.</p></div></div>");
+                                    out.println("<div class='d-flex bd-highlight'>"
+                                            + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
+                                            + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../unblock-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: green;'><i class='fa fa-key'></i> Unblock</a>"
+                                            + "</div></div><hr>");
                                 } else {
-                                    if (rs.getInt("is_admin") == 1) {
-                                        out.println("<div class='card' style='width: 100%; height: 10rem;'><div class='card-body'><h5 class='card-title'> " + rs.getString("first_name").substring(0, 1).toUpperCase()
-                                                + rs.getString("first_name").substring(1) + " "
-                                                + rs.getString("last_name").substring(0, 1).toUpperCase()
-                                                + rs.getString("last_name").substring(1)
-                                                + adminTag + "</h5>"
-                                                + "<h6 class='card-subtitle mb-2 text-muted'>registered on</h6>"
-                                                + "<a href='#' class='card-link'>Edit</a><a href='../block-user?id=" + rs.getInt("id") + "' class='card-link'>Block</a>"
-                                                + "<p class='card-text'>This is a admin account. The admin has overall access to everything.</p></div></div>");
-
-                                    } else {
-                                        out.println("<div class='card' style='width: 100%; height: 10rem;'><div class='card-body'><h5 class='card-title'> " + rs.getString("first_name").substring(0, 1).toUpperCase()
-                                                + rs.getString("first_name").substring(1) + " "
-                                                + rs.getString("last_name").substring(0, 1).toUpperCase()
-                                                + rs.getString("last_name").substring(1)
-                                                + "</h5>"
-                                                + "<h6 class='card-subtitle mb-2 text-muted'>registered on</h6>"
-                                                + "<a href='#' class='card-link'>Edit</a><a href='../block-user?id=" + rs.getInt("id") + "' class='card-link'>Block</a>"
-                                                + "<p class='card-text'>The user all the access to the rights that a normal client has.</p></div></div>");
-                                    }
+                                    out.println("<div class='d-flex bd-highlight'>"
+                                            + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
+                                            + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../block-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-ban'></i> Block</a>"
+                                            + "</div></div><hr>");
                                 }
                             }
                             conn.close();
                         %>
-                        </div>
-                        </div>
-                        </div>
                     </main>
                 </section>
                 <section id="panel-3">
                     <main style='margin: 0 auto;'>
                         <h1>Add New User</h1>
                         <form method="POST" action="../create-user" style='margin: 0 auto;' class="form register-form">
-                            <input type="text" name="first_name" placeholder="first name"/>
-                            <input type="text" name="last_name" placeholder="last name"/>
-                            <input type="text" name="phone_number" placeholder="phone"/>
-                            <input type="text" name="email" placeholder="email address"/>
-                            <input type="text" name="username" placeholder="username"/>
-                            <input type="password" name="password" placeholder="password"/>
-                            <input type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
+                            <input required type="text" name="first_name" placeholder="first name"/>
+                            <input required type="text" name="last_name" placeholder="last name"/>
+                            <input required type="text" name="phone_number" placeholder="phone"/>
+                            <input required type="text" name="email" placeholder="email address"/>
+                            <input required type="text" name="username" placeholder="username"/>
+                            <input required type="password" name="password" placeholder="password"/>
+                            <input required type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
                             <select name="is_admin" required id="cars" style='width: 100%; padding: 10px; margin-bottom: 10px; background: #F2F2F2'>
                                 <option value="" selected disabled hidden>-- choose user type --</option>
                                 <option value="1">admin</option>

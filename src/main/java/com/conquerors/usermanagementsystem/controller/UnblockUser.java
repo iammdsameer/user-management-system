@@ -7,7 +7,6 @@ package com.conquerors.usermanagementsystem.controller;
 
 import com.conquerors.usermanagementsystem.dao.UserDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -48,7 +47,7 @@ public class UnblockUser extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             dao.unblockUser(id);
-            session.setAttribute("blocked", "The user has been blocked.");
+            session.setAttribute("blocked", "The user has been unblocked.");
             response.sendRedirect("profile/portal.jsp");
         } catch (Exception ex) {
             Logger.getLogger(BlockUser.class.getName()).log(Level.SEVERE, null, ex);
