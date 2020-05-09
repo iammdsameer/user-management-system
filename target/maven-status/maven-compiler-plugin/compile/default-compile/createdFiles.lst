@@ -1,11 +1,13 @@
 com\conquerors\usermanagementsystem\controller\RegisterServlet.class
+com\conquerors\usermanagementsystem\controller\AdminScope.class
+com\conquerors\usermanagementsystem\controller\SessionCounterListener.class
+com\conquerors\usermanagementsystem\controller\BlockUser.class
+com\conquerors\usermanagementsystem\controller\EditUser.class
 com\conquerors\usermanagementsystem\dao\UserDao.class
 com\conquerors\usermanagementsystem\model\User.class
-com\conquerors\usermanagementsystem\controller\AdminScope.class
 com\conquerors\usermanagementsystem\controller\LoginServlet.class
 com\conquerors\usermanagementsystem\controller\RecoverPassword.class
-com\conquerors\usermanagementsystem\controller\SessionCounterListener.class
 com\conquerors\usermanagementsystem\controller\UnblockUser.class
-com\conquerors\usermanagementsystem\controller\BlockUser.class
+com\conquerors\usermanagementsystem\controller\ShowUserDetails.class
 com\conquerors\usermanagementsystem\ConnectDB.class
 com\conquerors\usermanagementsystem\controller\EditProfile.class

@@ -11,7 +11,7 @@
 <%@page import="com.conquerors.usermanagementsystem.controller.SessionCounterListener"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
-String useredit = (String) session.getAttribute("done");
+    String useredit = (String) session.getAttribute("done");
     String blocked = (String) session.getAttribute("blocked");
     Integer isAdmin = (Integer) session.getAttribute("is_admin");
     String registered = (String) session.getAttribute("registered");
@@ -82,6 +82,11 @@ String useredit = (String) session.getAttribute("done");
             .form .register-form {
                 display: none;
             }
+            * {
+                -webkit-box-sizing: initial;
+                -moz-box-sizing: initial;
+                box-sizing:content-box;
+            }
         </style>
     </head>
     <body>
@@ -99,7 +104,7 @@ String useredit = (String) session.getAttribute("done");
         <input id="nav-ctrl"
                class="panel-radios" type="checkbox" name="nav-checkbox">
 
-        <a href="dashboard.jsp" style="text-decoration: none;"><p style="color: white; margin-left: 15px;"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home</p></a>
+        <a href="dashboard.jsp" style="text-decoration: none;"><p style="color: white; margin-left: 15px; margin-top: 20px;"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home</p></a>
         <header id="introduction">
             <h1>Admin Portal | Conquerors</h1>
         </header>
@@ -174,7 +179,7 @@ String useredit = (String) session.getAttribute("done");
                             String first_name;
                             String last_name;
                             while (rs.next()) {
-                                first_name = rs.getString("first_name")+ " ";
+                                first_name = rs.getString("first_name") + " ";
                                 last_name = rs.getString("last_name");
                                 if (rs.getInt("is_blocked") == 1) {
                                     out.println("<div class='d-flex bd-highlight'>"

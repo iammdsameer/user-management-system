@@ -12,7 +12,7 @@
         first_name = first_name.substring(0, 1).toUpperCase() + first_name.substring(1);
     }
     Date loggedIn = new Date(session.getCreationTime());
-    
+
     if (isLoggedIn != "true" || first_name == null) {
         response.sendRedirect("../login.jsp");
     }
@@ -26,8 +26,19 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <script src="js/clock.js"></script>
+        <style>
+            #timedate {
+                font: small-caps lighter 43px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+                text-align: left;
+                float: right;
+                color:#000;
+                border-left: 3px solid #3445B4;
+                padding-left: 30px;
+            }
+        </style>
     </head>
-    <body>
+    <body onLoad="initClock()">
 
         <div class="wrapper d-flex align-items-stretch">
             <nav id="sidebar">
@@ -74,10 +85,31 @@
 
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5">
-                <h2 class="mb-4">Hello <%= first_name %>,</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p><%= loggedIn %></p>
+                <div style="width: 70%; display: inline-block;">
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/27d7285d32/kathmandu/" data-label_1="Today's Weather" data-label_2="Kathmandu" data-theme="weather_one" >Today's Weather Kathmandu</a>
+                    <script>
+                        !function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = 'https://weatherwidget.io/js/widget.min.js';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, 'script', 'weatherwidget-io-js');
+                    </script>
+                </div>
+                <div style="display: inline-block;" id="timedate">
+                    <a id="h">12</a> :
+                    <a id="m">00</a>:
+                    <a id="s">00</a><br />
+                    <a id="mon">January</a>
+                    <a id="d">1</a>,
+                    <a id="y">0</a>
+                </div>
+                <div style="clear: both; width: 30px;"></div>
+                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+                <div class="elfsight-app-06dfd033-42d0-4ff1-bd0e-79231cd9c985"></div>
             </div>
         </div>
 

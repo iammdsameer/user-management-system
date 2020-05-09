@@ -591,3 +591,7 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
+
+* {
+    box-sizing: content-box;
+}
