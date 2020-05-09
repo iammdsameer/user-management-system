@@ -31,6 +31,14 @@
         <servlet-name>UnblockUser</servlet-name>
         <servlet-class>com.conquerors.usermanagementsystem.controller.UnblockUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditUser</servlet-name>
+        <servlet-class>com.conquerors.usermanagementsystem.controller.EditUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowUserDetails</servlet-name>
+        <servlet-class>com.conquerors.usermanagementsystem.controller.ShowUserDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -58,6 +66,14 @@
     <servlet-mapping>
         <servlet-name>UnblockUser</servlet-name>
         <url-pattern>/unblock-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUser</servlet-name>
+        <url-pattern>/edit-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowUserDetails</servlet-name>
+        <url-pattern>/user-details</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

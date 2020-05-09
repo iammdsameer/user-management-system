@@ -11,6 +11,7 @@
 <%@page import="com.conquerors.usermanagementsystem.controller.SessionCounterListener"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
+String useredit = (String) session.getAttribute("done");
     String blocked = (String) session.getAttribute("blocked");
     Integer isAdmin = (Integer) session.getAttribute("is_admin");
     String registered = (String) session.getAttribute("registered");
@@ -141,6 +142,12 @@
                             <% session.removeAttribute("registered");%>
                         </p>
                         <% }%>
+                        <% if (useredit != null) {%>
+                        <p style="color:green; font-size: 16px;"> 
+                            <%=useredit%>
+                            <% session.removeAttribute("done");%>
+                        </p>
+                        <% }%>
                         <% if (blocked != null) {%>
                         <p style="color:green; font-size: 16px;"> 
                             <%=blocked%>
@@ -173,7 +180,7 @@
                                     out.println("<div class='d-flex bd-highlight'>"
                                             + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
                                             + "<div class='p-2 bd-highlight'>"
-                                            + "<a href='' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
+                                            + "<a href='../user-details?id=" + rs.getInt("id") + "' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
                                             + "</div>"
                                             + "<div class='p-2 bd-highlight'>"
                                             + "<a href='../unblock-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: green;'><i class='fa fa-key'></i> Unblock</a>"
@@ -182,7 +189,7 @@
                                     out.println("<div class='d-flex bd-highlight'>"
                                             + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
                                             + "<div class='p-2 bd-highlight'>"
-                                            + "<a href='' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
+                                            + "<a href='../user-details?id=" + rs.getInt("id") + "' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
                                             + "</div>"
                                             + "<div class='p-2 bd-highlight'>"
                                             + "<a href='../block-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-ban'></i> Block</a>"

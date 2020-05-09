@@ -45,7 +45,7 @@ public class EditProfile extends HttpServlet {
                 session.setAttribute("changesMade", "Your changes has been updated succesfully!");
             } else {
                 // This will redirect user to the registration page telling that account was not created.
-                session.setAttribute("changesNotMade", "Oops! Something went wrong.");
+                session.setAttribute("changesMade", "Oops! Something went wrong.");
             }
         } catch (Exception e) {
             e.printStackTrace();
