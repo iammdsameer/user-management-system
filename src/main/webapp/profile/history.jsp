@@ -4,11 +4,17 @@
     Author     : iammd
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.conquerors.usermanagementsystem.ConnectDB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
+    Integer id = (Integer) session.getAttribute("id");
+    if (isLoggedIn != "true" || id == null) {
+        response.sendRedirect("../login.jsp");
+    }
 %>
-<% if (isLoggedIn != "true")
-        response.sendRedirect("../index.jsp");%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,7 +50,7 @@
                             <a href="#"><span class="fa fa-history mr-3"></span> History</a>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-cogs mr-3"></span> Settings</a>
+                            <a href="portal.jsp"><span class="fa fa-cogs mr-3"></span> Admin Portal</a>
                         </li>
                         <li>
                             <a href="contacts.jsp"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
@@ -69,10 +75,18 @@
             <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5">
                 <h2 class="mb-4">History</h2>
-                <ul>
-                    <li> Changed Password </li>
-                </ul>
-                </div>
+                <%
+                    Connection conn = ConnectDB.getConnection();
+                    String sql = "SELECT * FROM history where uid=" + id;
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ResultSet rs = ps.executeQuery();
+
+                    while (rs.next()) {
+                        out.println(rs.getString("logged_on"));
+                        out.println(rs.getString("logged_at"));
+                    }
+                %>
+            </div>
         </div>
 
         <script src="js/jquery.min.js"></script>

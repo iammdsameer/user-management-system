@@ -19,6 +19,18 @@
         <servlet-name>RecoverPassword</servlet-name>
         <servlet-class>com.conquerors.usermanagementsystem.controller.RecoverPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminScope</servlet-name>
+        <servlet-class>com.conquerors.usermanagementsystem.controller.AdminScope</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlockUser</servlet-name>
+        <servlet-class>com.conquerors.usermanagementsystem.controller.BlockUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnblockUser</servlet-name>
+        <servlet-class>com.conquerors.usermanagementsystem.controller.UnblockUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -34,6 +46,18 @@
     <servlet-mapping>
         <servlet-name>RecoverPassword</servlet-name>
         <url-pattern>/recover</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminScope</servlet-name>
+        <url-pattern>/create-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlockUser</servlet-name>
+        <url-pattern>/block-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnblockUser</servlet-name>
+        <url-pattern>/unblock-user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

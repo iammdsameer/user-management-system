@@ -19,6 +19,7 @@ public class User {
 
     private int id;
     private int isAdmin;
+    private int isBlocked;
     private String email;
     private String username;
     private String phone;
@@ -26,6 +27,14 @@ public class User {
     private String first_name;
     private String last_name;
     private String birth_date;
+
+    public int getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(int isBlocked) {
+        this.isBlocked = isBlocked;
+    }
 
     
     public int getId() {

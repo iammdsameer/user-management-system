@@ -1,108 +1,261 @@
 <%-- 
-    Document   : portal
-    Created on : May 8, 2020, 5:40:18 AM
+    Document   : portal2
+    Created on : May 8, 2020, 6:01:48 PM
     Author     : iammd
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.conquerors.usermanagementsystem.ConnectDB"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="com.conquerors.usermanagementsystem.controller.SessionCounterListener"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
-    int isAdmin = (Integer) session.getAttribute("is_admin");
-%>
+    String blocked = (String) session.getAttribute("blocked");
+    Integer isAdmin = (Integer) session.getAttribute("is_admin");
+    String registered = (String) session.getAttribute("registered");
+    if (isLoggedIn != "true" || isAdmin == null) {
+        response.sendRedirect("../login.jsp");
+    }
 
-<% if (isLoggedIn != "true")
-        response.sendRedirect("../index.jsp");%>
+    else if (isAdmin != 1) {
+        response.sendRedirect("notadmin.jsp");
+    }  
+%>
 <!DOCTYPE html>
-<html>
+<html lang="en" >
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         <title>Admin Portal</title>
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/portal.css">
+
+        <style>
+            .form {
+                position: relative;
+                z-index: 1;
+                background: #FFFFFF;
+                max-width: 360px;
+                margin: 0 auto 100px;
+                padding: 45px;
+                text-align: center;
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+            }
+            .form input {
+                font-family: "Roboto", sans-serif;
+                outline: 0;
+                background: #f2f2f2;
+                width: 100%;
+                border: 0;
+                margin: 0 0 15px;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: 14px;
+            }
+            .form button {
+                font-family: "Roboto", sans-serif;
+                text-transform: uppercase;
+                outline: 0;
+                background: #3445b4;
+                width: 100%;
+                border: 0;
+                padding: 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                -webkit-transition: all 0.3 ease;
+                transition: all 0.3 ease;
+                cursor: pointer;
+            }
+            .form button:hover,.form button:active,.form button:focus {
+                background: #3b368b;
+            }
+            .form .message {
+                margin: 15px 0 0;
+                color: #b3b3b3;
+                font-size: 12px;
+            }
+            .form .message a {
+                color: #3445b4;
+                text-decoration: none;
+            }
+            .form .register-form {
+                display: none;
+            }
+        </style>
     </head>
     <body>
-        <div class="wrapper d-flex align-items-stretch">
-            <nav id="sidebar">
-                <div class="custom-menu">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                        <i class="fa fa-bars"></i>
-                        <span class="sr-only">Toggle Menu</span>
-                    </button>
-                </div>
-                <div class="p-4">
-                    <h1><a href="index.html" class="logo">Conquerors <span>User Management System</span></a></h1>
-                    <ul class="list-unstyled components mb-5">
-                        <li class="active">
-                            <a href="dashboard.jsp"><span class="fa fa-home mr-3"></span> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="me.jsp"><span class="fa fa-user mr-3"></span> Profile</a>
-                        </li>
-                        <li>
-                            <a href="history.jsp"><span class="fa fa-history mr-3"></span> History</a>
-                        </li>
-                        <li>
-                            <a href="portal.jsp"><span class="fa fa-cogs mr-3"></span> Admin Portal</a>
-                        </li>
-                        <li>
-                            <a href="contacts.jsp"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
-                        </li>
-                        <li>
-                            <a href="logout.jsp"><span class="fa fa-sign-out mr-3"></span> Log Out</a>
-                        </li>
-                    </ul>
+        <!-- TAB CONTROLLERS -->
+        <input id="panel-1-ctrl"
+               class="panel-radios" type="radio" name="tab-radios" checked>
+        <input id="panel-2-ctrl"
+               class="panel-radios" type="radio" name="tab-radios">
+        <input id="panel-3-ctrl"
+               class="panel-radios" type="radio" name="tab-radios">
+        <input id="panel-4-ctrl"
+               class="panel-radios" type="radio" name="tab-radios">
+        <input id="panel-5-ctrl"
+               class="panel-radios" type="radio" name="tab-radios">
+        <input id="nav-ctrl"
+               class="panel-radios" type="checkbox" name="nav-checkbox">
 
-                    <div class="mb-5">
-                        <h3 class="h6 mb-3">For Newsletters: </h3>
-                        <form action="#" class="subscribe-form">
-                            <div class="form-group d-flex">
-                                <div class="icon"><span class="icon-paper-plane"></span></div>
-                                <input type="text" class="form-control" placeholder="Enter Email Address">
-                            </div>
+        <a href="dashboard.jsp" style="text-decoration: none;"><p style="color: white; margin-left: 15px;"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home</p></a>
+        <header id="introduction">
+            <h1>Admin Portal | Conquerors</h1>
+        </header>
+
+        <!-- TABS LIST -->
+        <ul id="tabs-list">
+            <!-- MENU TOGGLE -->
+            <label id="open-nav-label" for="nav-ctrl"></label>
+            <li id="li-for-panel-1">
+                <label class="panel-label"
+                       for="panel-1-ctrl">Dashboard</label>
+            </li><!--INLINE-BLOCK FIX
+            --><li id="li-for-panel-2">
+                <label class="panel-label"
+                       for="panel-2-ctrl">User Overview</label>
+            </li><!--INLINE-BLOCK FIX
+            --><li id="li-for-panel-3">
+                <label class="panel-label"
+                       for="panel-3-ctrl">New Registration</label>
+            </li><!--INLINE-BLOCK FIX
+            --><li id="li-for-panel-4">
+                <label class="panel-label"
+                       for="panel-4-ctrl">Activity Logs</label>
+            </li><!--INLINE-BLOCK FIX
+            --><li id="li-for-panel-5" class="last">
+                <label class="panel-label"
+                       for="panel-5-ctrl">Reports</label>
+            </li>
+            <label id="close-nav-label" for="nav-ctrl">Close</label>
+        </ul>
+
+        <!-- THE PANELS -->
+        <article id="panels">
+            <div class="container">
+                <section id="panel-1">
+                    <main>
+                        <% if (registered != null) {%>
+                        <p style="color:green; font-size: 16px;"> 
+                            User Account Creation Successful.
+                            <% session.removeAttribute("registered");%>
+                        </p>
+                        <% }%>
+                        <% if (blocked != null) {%>
+                        <p style="color:green; font-size: 16px;"> 
+                            <%=blocked%>
+                            <% session.removeAttribute("blocked");%>
+                        </p>
+                        <% }%>
+                        <h1>Recently Updated
+                        </h1>
+                        <div class="card card-4">
+                            <br>
+                            <h3>No. of Active Users</h3>
+                            <p style='font-size: 6em; color: #3445B4; margin: 20px;'><%= SessionCounterListener.getTotalActiveSession()%></p>
+                        </div>
+                    </main>
+                </section>
+                <section id="panel-2">
+                    <main>
+                        <h1>Total Registered Users</h1>
+                        <%
+                            Connection conn = ConnectDB.getConnection();
+                            String sql = "SELECT * FROM client";
+                            PreparedStatement ps = conn.prepareStatement(sql);
+                            ResultSet rs = ps.executeQuery();
+                            String adminTag = " <i class='fa fa-shield'></i>";
+                            while (rs.next()) {
+                                if (rs.getInt("is_blocked") == 1) {
+                                    out.println("<div class='card' style='width: 100%; height: 10rem;'><div class='card-body'><h5 class='card-title'> " + rs.getString("first_name").substring(0, 1).toUpperCase()
+                                            + rs.getString("first_name").substring(1) + " "
+                                            + rs.getString("last_name").substring(0, 1).toUpperCase()
+                                            + rs.getString("last_name").substring(1)
+                                            + adminTag + "</h5>"
+                                            + "<h6 class='card-subtitle mb-2 text-muted'>registered on</h6>"
+                                            + "<a href='#' class='card-link'>Edit</a><a style='color: red;' href='../unblock-user?id=" + rs.getInt("id") + "' class='card-link'>Unblock</a>"
+                                            + "<p class='card-text'>This account is disable by the admin. User has no longer the access.</p></div></div>");
+                                } else {
+                                    if (rs.getInt("is_admin") == 1) {
+                                        out.println("<div class='card' style='width: 100%; height: 10rem;'><div class='card-body'><h5 class='card-title'> " + rs.getString("first_name").substring(0, 1).toUpperCase()
+                                                + rs.getString("first_name").substring(1) + " "
+                                                + rs.getString("last_name").substring(0, 1).toUpperCase()
+                                                + rs.getString("last_name").substring(1)
+                                                + adminTag + "</h5>"
+                                                + "<h6 class='card-subtitle mb-2 text-muted'>registered on</h6>"
+                                                + "<a href='#' class='card-link'>Edit</a><a href='../block-user?id=" + rs.getInt("id") + "' class='card-link'>Block</a>"
+                                                + "<p class='card-text'>This is a admin account. The admin has overall access to everything.</p></div></div>");
+
+                                    } else {
+                                        out.println("<div class='card' style='width: 100%; height: 10rem;'><div class='card-body'><h5 class='card-title'> " + rs.getString("first_name").substring(0, 1).toUpperCase()
+                                                + rs.getString("first_name").substring(1) + " "
+                                                + rs.getString("last_name").substring(0, 1).toUpperCase()
+                                                + rs.getString("last_name").substring(1)
+                                                + "</h5>"
+                                                + "<h6 class='card-subtitle mb-2 text-muted'>registered on</h6>"
+                                                + "<a href='#' class='card-link'>Edit</a><a href='../block-user?id=" + rs.getInt("id") + "' class='card-link'>Block</a>"
+                                                + "<p class='card-text'>The user all the access to the rights that a normal client has.</p></div></div>");
+                                    }
+                                }
+                            }
+                            conn.close();
+                        %>
+                        </div>
+                        </div>
+                        </div>
+                    </main>
+                </section>
+                <section id="panel-3">
+                    <main style='margin: 0 auto;'>
+                        <h1>Add New User</h1>
+                        <form method="POST" action="../create-user" style='margin: 0 auto;' class="form register-form">
+                            <input type="text" name="first_name" placeholder="first name"/>
+                            <input type="text" name="last_name" placeholder="last name"/>
+                            <input type="text" name="phone_number" placeholder="phone"/>
+                            <input type="text" name="email" placeholder="email address"/>
+                            <input type="text" name="username" placeholder="username"/>
+                            <input type="password" name="password" placeholder="password"/>
+                            <input type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
+                            <select name="is_admin" required id="cars" style='width: 100%; padding: 10px; margin-bottom: 10px; background: #F2F2F2'>
+                                <option value="" selected disabled hidden>-- choose user type --</option>
+                                <option value="1">admin</option>
+                                <option value="0">client</option>
+                            </select>
+                            <button>create</button>
                         </form>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Page Content  -->
-            <div id="content" class="p-4 p-md-5 pt-5">
-                <% if (isAdmin == 1) {%>
-                <h2 class="mb-4">Hey Admin,</h2>
-<!--                <div class="list-group user-list ">
-                    <a href="#" class="list-group-item list-group-item-action active">
-                      Cras justo odio
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-                </div>-->
-                <div class="card card-4">
-                    <br>
-                    <h3>No. of Active Users</h3>
-                    <p style='font-size: 6em; color: #3445B4;'><%= SessionCounterListener.getTotalActiveSession() %></p>
-                </div>
-                <% } else {%>
-                <div class="alert alert-danger" role="alert">
-                    You are not authorized to access this page. Verify that you have the proper admin privilege !
-                </div>
-                <% }%>
+                    </main>
+                </section>
+                <section id="panel-4">
+                    <main>
+                        <h1>Tab :hover</h1>
+                        <p>When designing the <code>:hover</code> and "active" states I had a dilemma.</p>
+                        <pre>&lt;li id="li-for-panel-1"&gt;
+  &lt;label class="panel-label" for="panel-1-ctrl"&gt;CSS Radio Toggles&lt;/label&gt;
+&lt;/li&gt;</pre>
+                        <p>Each tab <code>li</code> has a <code>border-right</code>. But when the additional <code>border-top</code> appears, we dont want the lighter <code>border-right</code> to be shown all the way to the top. The fix for this is to cancel the <code>border-right</code> on both the <code>:hover</code> and "active" state as well as style the <code>li</code>'s next sibling's <code>border-left</code>.</p>
+                        <p>To do this, we can use a combination of the siblings after <code>~</code> and sibling next <code>+</code> selectors:</p>
+                        <pre><strong>/* remove the right border on "active" state */</strong>
+#panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 {
+  border-right: none;
+}
+<strong>/* add left to next sibling */</strong>
+#panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 + li {
+  border-left: 1px solid #dfdfdf;
+}</pre>
+                    </main>
+                </section>
+                <section id="panel-5">
+                    <main>
+                        <h1>Menu</h1>
+                        <p>On small screens, the tabs fold down into an expandable menu. To trigger the menu, I use a <code>checkbox</code> (note that it appears at the top of the screen on smaller screen sizes). There are two labels that trigger this checkbox. One opens and the other closes the menu. The one that opens is absolutely positioned invisibly over the "active" menu item. The closing label is at the bottom of the open menu.</p>
+                        <p>The best way I have found to show and hide content without using absolute positioning is to use a combination of <code>max-height</code> and <code>opacity</code>. When "inactive", the content has a <code>max-height: 0</code> and <code>opacity: 0</code>.</p>
+                        <p>It also has a <code>transition: opacity</code> when I don't know the future height (this panel's content for example) and <code>transition: opacity, max-height</code> when I do know the future height (like the menu). When "active", the <code>max-height</code> and <code>opacity</code> get positive values and the content will transition in. I'm sure flexbox could get me around this hack, but this works for now.</p>   
+                    </main>
+                </section>
             </div>
-        </div>
+        </article>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </body>
 </html>

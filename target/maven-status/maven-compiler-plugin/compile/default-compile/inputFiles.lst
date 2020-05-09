@@ -1,8 +1,11 @@
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\ConnectDB.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\RecoverPassword.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\AdminScope.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\RegisterServlet.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\dao\UserDao.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\UnblockUser.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\LoginServlet.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\SessionCounterListener.java
+C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\BlockUser.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\controller\EditProfile.java
 C:\Users\iammd\Codes\user-management-system\src\main\java\com\conquerors\usermanagementsystem\model\User.java

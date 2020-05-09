@@ -8,17 +8,24 @@
 <%
     String isLoggedIn = (String) session.getAttribute("isLoggedIn");
     String first_name = (String) session.getAttribute("first_name");
+    if (first_name != null) {
+        first_name = first_name.substring(0, 1).toUpperCase() + first_name.substring(1);
+    }
     String last_name = (String) session.getAttribute("last_name");
+    if (last_name != null) {
+        last_name = last_name.substring(0, 1).toUpperCase() + last_name.substring(1);
+    }
     String email = (String) session.getAttribute("email");
     String username = (String) session.getAttribute("username");
     String pass = (String) session.getAttribute("pass");
     String birth_date = (String) session.getAttribute("birth_date");
     String phone = (String) session.getAttribute("phone");
-    int id = (Integer) session.getAttribute("id");
+    Integer id = (Integer) session.getAttribute("id");
     String changesMade = (String) session.getAttribute("changesMade");
 %>
-<% if (isLoggedIn != "true")
-        response.sendRedirect("../index.jsp");%>
+<% if (isLoggedIn != "true" || first_name == null) {
+        response.sendRedirect("../login.jsp");
+}%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,7 +61,7 @@
                             <a href="history.jsp"><span class="fa fa-history mr-3"></span> History</a>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-cogs mr-3"></span> Settings</a>
+                            <a href="portal.jsp"><span class="fa fa-cogs mr-3"></span> Admin Portal</a>
                         </li>
                         <li>
                             <a href="contacts.jsp"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
@@ -88,14 +95,14 @@
                         <label>
                             <p class="label-txt">YOUR FIRST NAME</p>
                             <input type="hidden" name="id" value="<%= id%>">
-                            <input type="text" name="first_name" class="input" value="<%= first_name.substring(0, 1).toUpperCase() + first_name.substring(1)%>">
+                            <input type="text" name="first_name" class="input" value="<%= first_name %>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
                         </label>
                         <label>
                             <p class="label-txt">YOUR LAST NAME</p>
-                            <input type="text" name="last_name" class="input" value="<%= last_name.substring(0, 1).toUpperCase() + last_name.substring(1)%>">
+                            <input type="text" name="last_name" class="input" value="<%= last_name %>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
