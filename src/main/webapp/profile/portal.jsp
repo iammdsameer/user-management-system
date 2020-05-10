@@ -15,6 +15,7 @@
     String blocked = (String) session.getAttribute("blocked");
     Integer isAdmin = (Integer) session.getAttribute("is_admin");
     String registered = (String) session.getAttribute("registered");
+    int totalUser = 0;
     if (isLoggedIn != "true" || isAdmin == null) {
         response.sendRedirect("../login.jsp");
     } else if (isAdmin != 1) {
@@ -142,6 +143,43 @@
         <!-- THE PANELS -->
         <article id="panels">
             <div class="container">
+                <section id="panel-2">
+                    <main>
+                        <%
+                            Connection conn = ConnectDB.getConnection();
+                            String sql = "SELECT * FROM client";
+                            PreparedStatement ps = conn.prepareStatement(sql);
+                            ResultSet rs = ps.executeQuery();
+                            String first_name;
+                            String last_name;
+                            while (rs.next()) {
+                                totalUser++;
+                                first_name = rs.getString("first_name") + " ";
+                                last_name = rs.getString("last_name");
+                                if (rs.getInt("is_blocked") == 1) {
+                                    out.println("<div class='d-flex bd-highlight'>"
+                                            + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../user-details?id=" + rs.getInt("id") + "' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
+                                            + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../unblock-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: green;'><i class='fa fa-key'></i> Unblock</a>"
+                                            + "</div></div><hr>");
+                                } else {
+                                    out.println("<div class='d-flex bd-highlight'>"
+                                            + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../user-details?id=" + rs.getInt("id") + "' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
+                                            + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../block-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-ban'></i> Block</a>"
+                                            + "</div></div><hr>");
+                                }
+                            }
+                            conn.close();
+                        %>
+                    </main>
+                </section>
                 <section id="panel-1">
                     <main>
                         <% if (registered != null) {%>
@@ -169,42 +207,11 @@
                             <h3>No. of Active Users</h3>
                             <p style='font-size: 6em; color: #3445B4; margin: 20px;'><%= SessionCounterListener.getTotalActiveSession()%></p>
                         </div>
-                    </main>
-                </section>
-                <section id="panel-2">
-                    <main>
-                        <%
-                            Connection conn = ConnectDB.getConnection();
-                            String sql = "SELECT * FROM client";
-                            PreparedStatement ps = conn.prepareStatement(sql);
-                            ResultSet rs = ps.executeQuery();
-                            String first_name;
-                            String last_name;
-                            while (rs.next()) {
-                                first_name = rs.getString("first_name") + " ";
-                                last_name = rs.getString("last_name");
-                                if (rs.getInt("is_blocked") == 1) {
-                                    out.println("<div class='d-flex bd-highlight'>"
-                                            + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
-                                            + "<div class='p-2 bd-highlight'>"
-                                            + "<a href='../user-details?id=" + rs.getInt("id") + "' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
-                                            + "</div>"
-                                            + "<div class='p-2 bd-highlight'>"
-                                            + "<a href='../unblock-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: green;'><i class='fa fa-key'></i> Unblock</a>"
-                                            + "</div></div><hr>");
-                                } else {
-                                    out.println("<div class='d-flex bd-highlight'>"
-                                            + "<div class='p-2 flex-grow-1 bd-highlight' style='text-transform: capitalize;'>" + first_name + last_name + "</div>"
-                                            + "<div class='p-2 bd-highlight'>"
-                                            + "<a href='../user-details?id=" + rs.getInt("id") + "' style='text-decoration: none; color: blue;'><i class='fa fa-pencil-square-o'></i> Edit</a>"
-                                            + "</div>"
-                                            + "<div class='p-2 bd-highlight'>"
-                                            + "<a href='../block-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-ban'></i> Block</a>"
-                                            + "</div></div><hr>");
-                                }
-                            }
-                            conn.close();
-                        %>
+                        <div class="card card-4">
+                            <br>
+                            <h3>Registered Users</h3>
+                            <p style='font-size: 6em; color: #3445B4; margin: 20px;'><%= totalUser%></p>
+                        </div>
                     </main>
                 </section>
                 <section id="panel-3">
@@ -231,34 +238,35 @@
                     <main>
                         <h1>User Activity</h1>
                         <div style="max-height:900px; overflow: auto;">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class='th' scope="col">#</th>
-                                    <th class='th' scope="col">Users</th>
-                                    <th class='th' scope="col">Logged On</th>
-                                    <th class='th' scope="col">Logged At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    conn = ConnectDB.getConnection();
-                                    sql = "SELECT client.first_name, client.last_name, history.logged_on,"
-                                            + "history.logged_at FROM client inner join history "
-                                            + "on client.id=history.uid;";
-                                    ps = conn.prepareStatement(sql);
-                                    rs = ps.executeQuery();
-                                    int counter=0;
-                                    while (rs.next()) { counter++; %>
-                                <tr>
-                                    <th scope="row"><%=counter%></th>
-                                    <td style='text-transform: capitalize;'><%= rs.getString("first_name") + " " + rs.getString("last_name") %></td>
-                                    <td><%= rs.getString("logged_on")%></td>
-                                    <td><%= rs.getString("logged_at")%></td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class='th' scope="col">#</th>
+                                        <th class='th' scope="col">Users</th>
+                                        <th class='th' scope="col">Logged On</th>
+                                        <th class='th' scope="col">Logged At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        conn = ConnectDB.getConnection();
+                                        sql = "SELECT client.first_name, client.last_name, history.logged_on,"
+                                                + "history.logged_at FROM client inner join history "
+                                                + "on client.id=history.uid;";
+                                        ps = conn.prepareStatement(sql);
+                                        rs = ps.executeQuery();
+                                        int counter = 0;
+                                        while (rs.next()) {
+                                        counter++;%>
+                                    <tr>
+                                        <th scope="row"><%=counter%></th>
+                                        <td style='text-transform: capitalize;'><%= rs.getString("first_name") + " " + rs.getString("last_name")%></td>
+                                        <td><%= rs.getString("logged_on")%></td>
+                                        <td><%= rs.getString("logged_at")%></td>
+                                    </tr>
+                                    <% }%>
+                                </tbody>
+                            </table>
                         </div>
                     </main>
                 </section>
