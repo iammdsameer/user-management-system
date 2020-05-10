@@ -109,7 +109,7 @@
                         </label>
                         <label>
                             <p class="label-txt">YOUR EMAIL</p>
-                            <input type="text" name="email" class="input" value="<%= email%>">
+                            <input type="email" name="email" class="input" value="<%= email%>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
@@ -123,7 +123,7 @@
                         </label>
                         <label>
                             <p class="label-txt">YOUR NUMBER</p>
-                            <input type="text" name="phone" class="input" value="<%= phone%>">
+                            <input required type="text" name="phone" class="input" value="<%= phone%>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>

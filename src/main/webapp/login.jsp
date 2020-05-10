@@ -15,6 +15,7 @@
 <html>
     <head>
         <title>Login / Register</title>
+        <link rel="stylesheet" href="profile/css/bootstrap.min.css">
 
         <!--Collapse to scroll lesser-->
 
@@ -145,13 +146,13 @@
                 </p>
                 <% }%>
                 <form method="POST" action="register" class="register-form">
-                    <input type="text" name="first_name" placeholder="first name"/>
-                    <input type="text" name="last_name" placeholder="last name"/>
-                    <input type="text" name="phone_number" placeholder="phone"/>
-                    <input type="text" name="email" placeholder="email address"/>
-                    <input type="text" name="username" placeholder="username"/>
-                    <input type="password" name="password" placeholder="password"/>
-                    <input type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
+                    <input required type="text" name="first_name" placeholder="first name"/>
+                    <input required type="text" name="last_name" placeholder="last name"/>
+                    <input required minlength="10" maxlength="10" type="text" name="phone_number" placeholder="phone"/>
+                    <input required type="email" name="email" placeholder="email address"/>
+                    <input required type="text" name="username" placeholder="username"/>
+                    <input required minlength="8" type="password" name="password" placeholder="password"/>
+                    <input required type="text" name="birth_date" placeholder="YYYY-MM-DD"/>
                     <button>create</button>
                     <p class="message">Already registered? <a class="new" href="#">Sign In</a></p>
                 </form>
