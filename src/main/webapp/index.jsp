@@ -14,7 +14,7 @@
 <html lang="en" >
     <head>
         <meta charset="UTF-8">
-        <title>CodePen - Daily UI #003: Landing page</title>
+        <title>Hello Guest.</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link rel='stylesheet' href="profile/css/index.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:800,600,300'><link rel="stylesheet" href="./style.css">
