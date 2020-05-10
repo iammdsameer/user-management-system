@@ -32,6 +32,9 @@
         <link rel="stylesheet" href="css/portal.css">
 
         <style>
+            .th {
+                position: sticky; top: 0; background: #fff;
+            }
             .form {
                 position: relative;
                 z-index: 1;
@@ -175,7 +178,6 @@
                             String sql = "SELECT * FROM client";
                             PreparedStatement ps = conn.prepareStatement(sql);
                             ResultSet rs = ps.executeQuery();
-                            String adminTag = " <i class='fa fa-shield'></i>";
                             String first_name;
                             String last_name;
                             while (rs.next()) {
@@ -227,29 +229,44 @@
                 </section>
                 <section id="panel-4">
                     <main>
-                        <h1>Tab :hover</h1>
-                        <p>When designing the <code>:hover</code> and "active" states I had a dilemma.</p>
-                        <pre>&lt;li id="li-for-panel-1"&gt;
-  &lt;label class="panel-label" for="panel-1-ctrl"&gt;CSS Radio Toggles&lt;/label&gt;
-&lt;/li&gt;</pre>
-                        <p>Each tab <code>li</code> has a <code>border-right</code>. But when the additional <code>border-top</code> appears, we dont want the lighter <code>border-right</code> to be shown all the way to the top. The fix for this is to cancel the <code>border-right</code> on both the <code>:hover</code> and "active" state as well as style the <code>li</code>'s next sibling's <code>border-left</code>.</p>
-                        <p>To do this, we can use a combination of the siblings after <code>~</code> and sibling next <code>+</code> selectors:</p>
-                        <pre><strong>/* remove the right border on "active" state */</strong>
-#panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 {
-  border-right: none;
-}
-<strong>/* add left to next sibling */</strong>
-#panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 + li {
-  border-left: 1px solid #dfdfdf;
-}</pre>
+                        <h1>User Activity</h1>
+                        <div style="max-height:900px; overflow: auto;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class='th' scope="col">#</th>
+                                    <th class='th' scope="col">Users</th>
+                                    <th class='th' scope="col">Logged On</th>
+                                    <th class='th' scope="col">Logged At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    conn = ConnectDB.getConnection();
+                                    sql = "SELECT client.first_name, client.last_name, history.logged_on,"
+                                            + "history.logged_at FROM client inner join history "
+                                            + "on client.id=history.uid;";
+                                    ps = conn.prepareStatement(sql);
+                                    rs = ps.executeQuery();
+                                    int counter=0;
+                                    while (rs.next()) { counter++; %>
+                                <tr>
+                                    <th scope="row"><%=counter%></th>
+                                    <td style='text-transform: capitalize;'><%= rs.getString("first_name") + " " + rs.getString("last_name") %></td>
+                                    <td><%= rs.getString("logged_on")%></td>
+                                    <td><%= rs.getString("logged_at")%></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        </div>
                     </main>
                 </section>
                 <section id="panel-5">
                     <main>
                         <h1>Menu</h1>
-                        <p>On small screens, the tabs fold down into an expandable menu. To trigger the menu, I use a <code>checkbox</code> (note that it appears at the top of the screen on smaller screen sizes). There are two labels that trigger this checkbox. One opens and the other closes the menu. The one that opens is absolutely positioned invisibly over the "active" menu item. The closing label is at the bottom of the open menu.</p>
-                        <p>The best way I have found to show and hide content without using absolute positioning is to use a combination of <code>max-height</code> and <code>opacity</code>. When "inactive", the content has a <code>max-height: 0</code> and <code>opacity: 0</code>.</p>
-                        <p>It also has a <code>transition: opacity</code> when I don't know the future height (this panel's content for example) and <code>transition: opacity, max-height</code> when I do know the future height (like the menu). When "active", the <code>max-height</code> and <code>opacity</code> get positive values and the content will transition in. I'm sure flexbox could get me around this hack, but this works for now.</p>   
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </main>
                 </section>
             </div>

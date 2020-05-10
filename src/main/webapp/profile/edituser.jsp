@@ -72,7 +72,7 @@
                 <div class="container">
                     <form class="me" method="POST" action="../edit-user">
                         <label>
-                            <p class="label-txt">YOUR FIRST NAME</p>
+                            <p class="label-txt">FIRST NAME</p>
                             <input type="hidden" name="id" value="<%= user.getId()%>">
                             <input type="text" name="first_name" class="input" value="<%= user.getFirst_name() %>">
                             <div class="line-box">
@@ -80,42 +80,42 @@
                             </div>
                         </label>
                         <label>
-                            <p class="label-txt">YOUR LAST NAME</p>
+                            <p class="label-txt">LAST NAME</p>
                             <input type="text" name="last_name" class="input" value="<%= user.getLast_name() %>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
                         </label>
                         <label>
-                            <p class="label-txt">YOUR EMAIL</p>
+                            <p class="label-txt">EMAIL</p>
                             <input type="text" name="email" class="input" value="<%= user.getEmail()%>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
                         </label>
                         <label>
-                            <p class="label-txt">YOUR USERNAME</p>
+                            <p class="label-txt">USERNAME</p>
                             <input type="text" name="username" class="input" value="<%= user.getUsername()%>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
                         </label>
                         <label>
-                            <p class="label-txt">YOUR NUMBER</p>
+                            <p class="label-txt">NUMBER</p>
                             <input type="text" name="phone" class="input" value="<%= user.getPhone()%>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
                         </label>
                         <label>
-                            <p class="label-txt">YOUR BIRTH DATE</p>
+                            <p class="label-txt">BIRTH DATE</p>
                             <input type='text' class="input" name='birth_date' value="<%= user.getBirth_date()%>">
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
                         </label>
                         <label>
-                            <p class="label-txt">YOUR PASSWORD</p>
+                            <p class="label-txt">PASSWORD</p>
                             <input type="password" name="password" class="input" value="<%= user.getPassword()%>">
                             <div class="line-box">
                                 <div class="line"></div>
