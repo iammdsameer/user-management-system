@@ -204,4 +204,21 @@ public class UserDao {
         }
         return user;
     }
+    
+    public void deleteUser(int id) throws Exception {
+        try {
+            String sql = "DELETE from history where uid=?;";
+            Connection conn = ConnectDB.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            sql = "DELETE from client where id=?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } 
 }

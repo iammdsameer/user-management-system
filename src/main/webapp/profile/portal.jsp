@@ -164,6 +164,9 @@
                                             + "</div>"
                                             + "<div class='p-2 bd-highlight'>"
                                             + "<a href='../unblock-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: green;'><i class='fa fa-key'></i> Unblock</a>"
+                                            + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../delete-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-trash'></i> Delete</a>"
                                             + "</div></div><hr>");
                                 } else {
                                     out.println("<div class='d-flex bd-highlight'>"
@@ -173,6 +176,9 @@
                                             + "</div>"
                                             + "<div class='p-2 bd-highlight'>"
                                             + "<a href='../block-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-ban'></i> Block</a>"
+                                            + "</div>"
+                                            + "<div class='p-2 bd-highlight'>"
+                                            + "<a href='../delete-user?id=" + rs.getInt("id") + "' style='text-decoration: none; color: red;'><i class='fa fa-trash'></i> Delete</a>"
                                             + "</div></div><hr>");
                                 }
                             }
@@ -257,7 +263,7 @@
                                         rs = ps.executeQuery();
                                         int counter = 0;
                                         while (rs.next()) {
-                                        counter++;%>
+                                            counter++;%>
                                     <tr>
                                         <th scope="row"><%=counter%></th>
                                         <td style='text-transform: capitalize;'><%= rs.getString("first_name") + " " + rs.getString("last_name")%></td>

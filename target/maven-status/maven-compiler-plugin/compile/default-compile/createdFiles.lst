@@ -1,6 +1,7 @@
 com\conquerors\usermanagementsystem\controller\RegisterServlet.class
 com\conquerors\usermanagementsystem\controller\AdminScope.class
 com\conquerors\usermanagementsystem\controller\SessionCounterListener.class
+com\conquerors\usermanagementsystem\controller\DeleteUser.class
 com\conquerors\usermanagementsystem\controller\BlockUser.class
 com\conquerors\usermanagementsystem\controller\EditUser.class
 com\conquerors\usermanagementsystem\dao\UserDao.class

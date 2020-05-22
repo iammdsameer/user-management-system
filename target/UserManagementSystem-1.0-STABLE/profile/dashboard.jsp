@@ -6,7 +6,8 @@
 
 <%@page import="java.sql.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% String isLoggedIn = (String) session.getAttribute("isLoggedIn");
+<% 
+    String isLoggedIn = (String) session.getAttribute("isLoggedIn");
     String first_name = (String) session.getAttribute("first_name");
     if (first_name != null) {
         first_name = first_name.substring(0, 1).toUpperCase() + first_name.substring(1);
