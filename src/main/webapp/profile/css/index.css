@@ -1,43 +1,4 @@
-body {
-    font-size: 48px;
-    font-family: "Droid Sans";
-}
-
-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-h1 {
-    color: #b9b9b9;
-}
-
-.blink {
-    color: #3542ab;
-    font-size: 1.5em;
-    animation: blink-anim 1s ease 0s infinite alternate;
-}
-
-@keyframes blink-anim {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-button:hover{cursor: pointer; background: #3542ab; color: white;}
-button {
-    background: transparent; outline: none;
-    position: relative;
-    border: 2px solid #111;
-    padding: 15px 50px;
-    overflow: hidden;
-}
-
-
-/*button div (button text before hover)*/
-button div{
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 800;
-    font-size: .8em;
+li:hover{
+    background-color: #000;
+    color: #fff;
 }
