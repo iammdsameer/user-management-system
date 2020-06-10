@@ -13,10 +13,7 @@ import java.sql.Connection;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author sam
- */
+
 public class UserTest {
 
     @Before
@@ -86,4 +83,49 @@ public class UserTest {
         }
     }
 
+    //    @Test
+//    public void testValidateUser() throws Exception {
+//        System.out.println("Validate with blocked user");
+//        String username = "ramkrishna";
+//        String password = "haha";
+//        User expResult = null;
+//        User result = UserDao.login(email, password);
+//        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+//    }
+    
+    
+//    
+//    @org.junit.Test
+//    public void testBlockUser() throws Exception{
+//        System.out.println("blockUser");
+//        int id= 2;
+//        UserDao instance = new UserDao();
+//        instance.blockUser(id);
+//        User user = instance.userDetails(id);
+//        
+//        if (user.getIsBlocked() ==1){
+//        assertTrue(true);
+//        }else{
+//        assertTrue(false);
+//        }
+//    
+//    }
+//
+//
+// @Test
+//   public void testUnblockUser() throws Exception{
+//     System.out.println("UnblockUser");
+//      int id= 2;
+//        UserDao instance = new UserDao();
+//       instance.unblockUser(id);
+//       User user = instance.userDetails(id);
+//        
+//       if (user.getIsBlocked() ==0){
+//        assertTrue(true);
+//        }else{
+//        assertTrue(false);
+//        }
+//   }
+    
 }

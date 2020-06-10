@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author iammd
- */
+
 public class ConnectDB {
 
     private static String driver = "org.postgresql.Driver";

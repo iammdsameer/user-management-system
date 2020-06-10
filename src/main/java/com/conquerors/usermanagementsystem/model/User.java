@@ -5,10 +5,6 @@
  */
 package com.conquerors.usermanagementsystem.model;
 
-/**
- *
- * @author iammd
- */
 public class User {
 
     /*
